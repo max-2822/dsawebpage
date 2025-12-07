@@ -1,35 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All C Codes Display</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            padding: 20px;
-        }
-        h2 {
-            background: #222;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        pre {
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            overflow-x: auto;
-        }
-    </style>
-</head>
-<body>
-    <h1>All C Program Codes</h1>
-
-    <h2>Code 1</h2>
-    <pre>#include <stdio.h>
+make a web page which contain code 1,2,3,4,5,6
+code1
+#include <stdio.h>
 #include <stdlib.h>
 struct Day {
     char *dayName;
@@ -44,7 +15,7 @@ void create(struct Day *day) {
     printf("Enter the date: ");
     scanf("%d", &day->date);
     printf("Enter the activity for the day: ");
-    scanf(" %[\n]s", day->activity);
+    scanf(" %[^\n]s", day->activity);
 }
 void read(struct Day *calendar, int size) {
     for (int i = 0; i < size; i++) {
@@ -82,10 +53,10 @@ int main() {
     freeMemory(calendar, size);
     free(calendar);
     return 0;
-}</pre>
+}
 
-    <h2>Code 2</h2>
-    <pre>#include <stdio.h>
+code 2
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #define MAX 5
@@ -110,8 +81,7 @@ int main() {
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice) {
-        case 1:
-            printf("Enter element to push: ");
+        case 1:            printf("Enter element to push: ");
             scanf("%d", &element);
             push(element);
             break;
@@ -199,10 +169,10 @@ void isUnderflow() {
     printf("\n--- Demonstrating Underflow ---\n");
     top = -1;
     pop();
-}</pre>
+}
 
-    <h2>Code 3</h2>
-    <pre>#include <stdio.h>
+code3 
+#include <stdio.h>
 #include <string.h>
 #define MAX 200
 void findAndReplace(char str[], char pat[], char rep[]);
@@ -244,10 +214,10 @@ void findAndReplace(char str[], char pat[], char rep[]) {
         printf("\nUpdated string after replacement:\n%s\n", result);
     else
         printf("\nPattern not found in the main string.\n");
-}</pre>
+}
 
-    <h2>Code 4</h2>
-    <pre>#include <stdio.h>
+code 4
+#include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 #define MAX 100
@@ -303,6 +273,185 @@ int main()
     infixToPostfix(infix, postfix);
     printf("Postfix expression: %s\n", postfix);
     return 0;
-}</pre>
+}
 
-    <h2>Code 5</h
+code 5
+
+#include <stdio.h>
+#include <math.h>
+#include <ctype.h>
+#define MAX 100
+int stack[MAX];
+int top = -1;
+void push(int val)
+ {
+           stack[++top] = val;
+}
+int pop() {
+        return stack[top--];
+}
+int evaluatePostfix(char exp[]) {
+    int i, op1, op2, res;
+
+    for (i = 0; exp[i] != '\0'; i++) {
+        char ch = exp[i];
+
+        if (isdigit(ch)) {
+            push(ch - '0');
+        } else if (ch == ' ') {
+            continue;
+        } else {
+            op2 = pop();
+            op1 = pop();
+
+            switch (ch) {
+                case '+': res = op1 + op2; break;
+                case '-': res = op1 - op2; break;
+                case '*': res = op1 * op2; break;
+                case '/': res = op1 / op2; break;
+                case '%': res = op1 % op2; break;
+                case '^': res = pow(op1, op2); break;
+            }
+            push(res);
+        }
+    }
+    return pop();
+}
+void towerOfHanoi(int n, char from, char to, char aux) {
+    if (n == 1) {
+        printf("Move disk 1 from %c -> %c\n", from, to);
+        return;
+    }
+    towerOfHanoi(n - 1, from, aux, to);
+    printf("Move disk %d from %c -> %c\n", n, from, to);
+    towerOfHanoi(n - 1, aux, to, from);
+}
+int main() {
+    int choice, n;
+    char exp[100];
+
+    while (1) {
+        printf("\n===== STACK APPLICATIONS =====\n");
+        printf("1. Evaluate Postfix Expression\n");
+        printf("2. Solve Tower of Hanoi\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        getchar();
+
+        switch (choice) {
+            case 1:
+                printf("Enter a postfix expression (use single digits & spaces): ");
+                fgets(exp, sizeof(exp), stdin);
+                printf("Result = %d\n", evaluatePostfix(exp));
+                break;
+
+            case 2:
+                printf("Enter number of disks: ");
+                scanf("%d", &n);
+                printf("\nSteps to solve Tower of Hanoi with %d disks:\n", n);
+                towerOfHanoi(n, 'A', 'C', 'B');
+                break;
+
+            case 3:
+                printf("Exiting...\n");
+                return 0;
+
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
+}
+
+code 6
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 5  
+char queue[MAX];
+int front = -1, rear = -1;
+void insert(char element);
+void delete();
+void display();
+int main() {
+    int choice;
+    char element;
+    while (1) {
+        printf("\n----- Circular Queue Menu -----\n");
+        printf("1. Insert an Element\n");
+        printf("2. Delete an Element\n");
+        printf("3. Display the Queue\n");
+        printf("4. Exit\n");
+        printf("--------------------------------\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+        case 1:
+            printf("Enter the character to insert: ");
+            scanf(" %c", &element);
+            insert(element);
+            break;
+        case 2:
+            delete();
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            printf("Exiting program...\n");
+            exit(0);
+        default:
+            printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}
+void insert(char element) {
+    // Check for overflow
+    if ((front == 0 && rear == MAX - 1) || (front == rear + 1)) {
+        printf("Queue Overflow! Cannot insert '%c'.\n", element);
+        return;
+    }
+    if (front == -1)
+        front = rear = 0;
+    else if (rear == MAX - 1)
+        rear = 0;
+    else
+        rear++;
+    queue[rear] = element;
+    printf("Inserted '%c' into the queue.\n", element);
+}
+void delete() {
+    if (front == -1) {
+        printf("Queue Underflow! No elements to delete.\n");
+        return;
+    }
+    char deletedElement = queue[front];
+        if (front == rear)
+        front = rear = -1;
+    else if (front == MAX - 1)
+        front = 0;
+    else
+        front++;
+    printf("Deleted element: '%c'\n", deletedElement);
+}
+void display() {
+    if (front == -1) {
+        printf("Queue is empty.\n");
+        return;
+    }
+    printf("Queue elements: ");
+    int i = front;
+    while (1) {
+        printf("%c ", queue[i]);
+        if (i == rear)
+            break;
+        i = (i + 1) % MAX;
+    }
+    printf("\n");
+    printf("Front = %d, Rear = %d\n", front, rear);
+} 
+
+
+
+
